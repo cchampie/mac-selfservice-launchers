@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Launching Mac Self Service…</title>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      margin: 32px;
+      line-height: 1.4;
+      background: #ffffff;
+    }
+
+    .card {
+      max-width: 720px;
+      padding: 24px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+    }
+
+    h1 {
+      margin: 0 0 12px 0;
+      font-size: 22px;
+    }
+
+    p {
+      margin: 12px 0;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #f3f4f6;
+      font-size: 13px;
+      color: #333;
+    }
+
+    .note {
+      font-size: 13px;
+      color: #555;
+      margin-top: 18px;
+    }
+
+    a {
+      color: #0a66c2;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>Launching Mac Self Service…</h1>
+
+    <span class="badge">Uninstall Microsoft Excel</span>
+
+    <p>
+      If prompted by macOS, choose <strong>Allow</strong> to let your browser open
+      <strong>Self Service.app</strong>.
+    </p>
+
+    <p class="note">
+      If nothing happens after a few seconds, click this fallback link:
+      <br />
+      <a id="fallbackLink" href="#">Open Self Service manually</a>
+    </p>
+
+    <p class="note">
+      For safety, Jamf may still require you to click <strong>Run</strong>
+      inside Self Service.
+    </p>
+  </div>
+
+  <script>
+    // Jamf Self Service deep link
+    const selfServiceUrl = "jamfselfservice://content?entity=policy&id=234&action=exec";
+
+    // Set fallback link
+    document.getElementById("fallbackLink").setAttribute("href", selfServiceUrl);
+
+    // Auto-launch Self Service shortly after page load
+    // Small delay helps Safari treat this as a continuation of a user action
+    setTimeout(() => {
+      window.location.href = selfServiceUrl;
+    }, 200);
+  </script>
+</body>
+</html>
